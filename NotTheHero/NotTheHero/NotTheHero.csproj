@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Exceptions\NameException.cs" />
     <Compile Include="Models\Crypt.cs" />
     <Compile Include="Models\DungeonRoom.cs" />
     <Compile Include="Models\Entity.cs" />
