@@ -8,22 +8,22 @@ namespace NotTheHero.Models
 {
     class Item
     {
-        //enum ItemQuality
-        //{
-        //    JUNK,
-        //    UNCOMMON,
-        //    COMMON,
-        //    RARE,
-        //    EPIC,
-        //    LEGENDARY,
-        //    EXOTIC,
-        //    DEVITEM
-        //}
+        public enum ItemQuality
+        {
+            JUNK,
+            UNCOMMON,
+            COMMON,
+            RARE,
+            EPIC,
+            LEGENDARY,
+            EXOTIC,
+            DEVITEM
+        }
 
         public string Name { get; set; }
         public int PriceValue { get; set; }
         public string FlavorText { get; set; }
         public bool Trashable { get; set; }
-        //public ItemQuality Rarity { get; set; }
+        public ItemQuality Rarity { get; set; }
     }
 }

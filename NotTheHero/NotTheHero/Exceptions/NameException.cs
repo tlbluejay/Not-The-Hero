@@ -11,9 +11,9 @@ namespace NotTheHero.Exceptions
 
         }
 
-        public static void CheckName(string value)
+        public static void CheckName(string name)
         {
-            if (value.Length > 40) throw new NameException("name cannot be more than 40 characters long");
+            if (name.Length > 40) throw new NameException($"name is {name.Length} characters long, name cannot be more than 40 characters long");
         }
     }
 }

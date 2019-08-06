@@ -63,12 +63,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Exceptions\HealthException.cs" />
+    <Compile Include="Exceptions\RankException.cs" />
     <Compile Include="Exceptions\NameException.cs" />
     <Compile Include="Models\Crypt.cs" />
     <Compile Include="Models\DungeonRoom.cs" />
+    <Compile Include="Models\Enemy.cs" />
     <Compile Include="Models\Entity.cs" />
-    <Compile Include="Models\GameState.cs" />
+    <Compile Include="Exceptions\GoldException.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Minion.cs" />
     <Compile Include="Models\Roster.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
