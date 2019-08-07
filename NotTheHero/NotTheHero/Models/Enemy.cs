@@ -4,7 +4,7 @@ namespace NotTheHero.Models
 {
     class Enemy : Entity
     {
-        public Enemy(int maxHealth, string name, int speed, int accuracy, int gold) : base(maxHealth, name, speed, accuracy)
+        public Enemy(int maxHealth, string name, int speed, int accuracy, int rank, int gold) : base(maxHealth, name, speed, accuracy, rank)
         {
             this.gold = gold;
         }

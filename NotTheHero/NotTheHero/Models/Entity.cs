@@ -4,6 +4,8 @@ namespace NotTheHero.Models
 {
     class Entity
     {
+        public const int MIN_RANK = 0, MAX_RANK = 5;
+
         public Entity(int maxHealth, string name, int speed, int accuracy)
         {
             this.maxHealth = maxHealth;
@@ -13,9 +15,17 @@ namespace NotTheHero.Models
             this.accuracy = accuracy;
         }
 
-        protected static readonly int Rank1 = 40, Rank2 = 80, Rank3 = 160, Rank4 = 320, Rank5 = 640;
+        public Entity(int maxHealth, string name, int speed, int accuracy, int rank)
+        {
+            this.maxHealth = maxHealth;
+            this.health = maxHealth;
+            this.name = name;
+            this.speed = speed;
+            this.accuracy = accuracy;
+            this.rank = rank;
+        }
 
-        private int maxHealth;
+        protected int maxHealth;
         public int MaxHealth
         {
             get
@@ -29,7 +39,7 @@ namespace NotTheHero.Models
             }
         }
 
-        private int health;
+        protected int health;
         public int Health
         {
             get
@@ -64,7 +74,7 @@ namespace NotTheHero.Models
             }
         }
 
-        private int speed;
+        protected int speed;
         public int Speed
         {
             get
@@ -77,7 +87,7 @@ namespace NotTheHero.Models
             }
         }
 
-        private int accuracy;
+        protected int accuracy;
         public int Accuracy
         {
             get
@@ -87,6 +97,19 @@ namespace NotTheHero.Models
             set
             {
                 accuracy = value;
+            }
+        }
+
+        protected int defense;
+        public virtual int Defense
+        {
+            get
+            {
+                return defense;
+            }
+            set
+            {
+                defense = value;
             }
         }
 
@@ -112,7 +135,7 @@ namespace NotTheHero.Models
             }
             set
             {
-                RankException.CheckLevel(value);
+                RankException.CheckRank(value);
                 rank = value;
             }
         }
