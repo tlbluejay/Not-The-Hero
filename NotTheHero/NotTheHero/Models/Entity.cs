@@ -6,8 +6,6 @@ namespace NotTheHero.Models
     [Serializable]
     class Entity
     {
-        public const int MIN_RANK = 0, MAX_RANK = 5;
-
         public Entity(int maxHealth, string name, int speed, int accuracy, int defense)
         {
             this.maxHealth = maxHealth;
@@ -26,6 +24,8 @@ namespace NotTheHero.Models
             this.accuracy = accuracy;
             this.rank = rank;
         }
+
+        public const int MIN_RANK = 0, MAX_RANK = 5;
 
         public virtual int ActionModifier()
         {
