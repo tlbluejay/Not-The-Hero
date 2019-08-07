@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Exceptions\HealthException.cs" />
+    <Compile Include="Exceptions\PowerException.cs" />
     <Compile Include="Exceptions\RankException.cs" />
     <Compile Include="Exceptions\NameException.cs" />
     <Compile Include="Models\Crypt.cs" />
