@@ -8,13 +8,16 @@ namespace NotTheHero.Models
 {
     class Roster : List<Entity>
     {
-        public readonly int MAX_ROSTER_LENGTH = 50;
-        public readonly int MAX_TEAMSIZE = 5;
-        public List<Entity> entities { get; set; }
+        public Roster() : base()
+        { }
 
-        Roster()
+        public Roster(int capacity) : base(capacity)
         {
-            entities = new List<Entity>();
+
         }
+
+        private const int MAX_ROSTER_LENGTH = 50;
+        public const int PARTY_SIZE = 4;
+
     }
 }

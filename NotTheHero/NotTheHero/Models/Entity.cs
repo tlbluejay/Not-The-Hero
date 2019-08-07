@@ -1,12 +1,12 @@
 ﻿using NotTheHero.Exceptions;
+using System;
 
 namespace NotTheHero.Models
 {
+    [Serializable]
     class Entity
     {
-        public const int MIN_RANK = 0, MAX_RANK = 5;
-
-        public Entity(int maxHealth, string name, int speed, int accuracy)
+        public Entity(int maxHealth, string name, int speed, int accuracy, int defense)
         {
             this.maxHealth = maxHealth;
             this.health = maxHealth;
@@ -15,7 +15,7 @@ namespace NotTheHero.Models
             this.accuracy = accuracy;
         }
 
-        public Entity(int maxHealth, string name, int speed, int accuracy, int rank)
+        public Entity(int maxHealth, string name, int speed, int accuracy, int defense, int rank)
         {
             this.maxHealth = maxHealth;
             this.health = maxHealth;
@@ -23,6 +23,13 @@ namespace NotTheHero.Models
             this.speed = speed;
             this.accuracy = accuracy;
             this.rank = rank;
+        }
+
+        public const int MIN_RANK = 0, MAX_RANK = 5;
+
+        public virtual int ActionModifier()
+        {
+            return 1;
         }
 
         protected int maxHealth;

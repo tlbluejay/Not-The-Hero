@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Exceptions\HealthException.cs" />
+    <Compile Include="Exceptions\PowerException.cs" />
     <Compile Include="Exceptions\RankException.cs" />
     <Compile Include="Exceptions\NameException.cs" />
     <Compile Include="Models\Action.cs" />
