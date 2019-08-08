@@ -3,10 +3,8 @@ using System;
 
 namespace NotTheHero.Models
 {
-    [Serializable]
-    class Entity
+    abstract class Entity
     {
-        //TODO make abstract
         public Entity(int maxHealth, string name, int speed, int accuracy, int defense)
         {
             this.maxHealth = maxHealth;
