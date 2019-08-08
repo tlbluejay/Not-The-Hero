@@ -9,8 +9,8 @@ namespace NotTheHero.View
 {
     class ConsoleIO
     {
-
-        public static int PromptForMenuSelection(String[] options, bool withQuit)
+        
+        public static int PromptForMenuSelection(string[] options, bool withQuit, string prompt)
         {
             bool isInvalid = true;
             if(options.Length == 0)
@@ -32,7 +32,7 @@ namespace NotTheHero.View
                     }
                     try
                     {
-                        input = Int32.Parse(promptForInput("Select one of the menu options: ", false));
+                        input = Int32.Parse(promptForInput(prompt, false));
                     }
                     catch (FormatException nfe)
                     {
