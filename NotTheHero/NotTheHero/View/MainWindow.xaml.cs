@@ -22,7 +22,7 @@ namespace NotTheHero
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

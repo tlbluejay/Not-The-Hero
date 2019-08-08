@@ -141,7 +141,7 @@ namespace NotTheHero.Models
             }
             set
             {
-                RankException.CheckRank(value);
+                NotTheHero.Exceptions.RankException.CheckRank(value);
                 rank = value;
             }
         }
