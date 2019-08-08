@@ -2,6 +2,7 @@
 
 namespace NotTheHero.Models
 {
+    [Serializable]
     class Minion : Entity
     {
         public Minion(int maxHealth, string name, int speed, int accuracy, int defense) : base(maxHealth, name, speed, accuracy, defense)
