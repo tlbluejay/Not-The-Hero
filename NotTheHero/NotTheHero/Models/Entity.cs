@@ -26,7 +26,7 @@ namespace NotTheHero.Models
 
         public const int MIN_RANK = 0, MAX_RANK = 5;
 
-        public virtual int ActionModifier()
+        public virtual double ActionModifier()
         {
             return 1;
         }

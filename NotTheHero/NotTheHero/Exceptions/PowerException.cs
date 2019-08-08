@@ -11,9 +11,9 @@ namespace NotTheHero.Exceptions
 
         }
 
-        public static void CheckPower(int rank)
+        public static void CheckPower(int power)
         {
-            if (rank < Models.Enemy.MIN_POWER || rank > Models.Enemy.MAX_POWER) throw new RankException($"rank is {rank}, rank must be greater than or equal to {Models.Enemy.MIN_POWER} and less than or equal to {Models.Enemy.MAX_POWER}");
+            if (power < Models.Enemy.MIN_POWER || power > Models.Enemy.MAX_POWER) throw new RankException($"rank is {power}, rank must be greater than or equal to {Models.Enemy.MIN_POWER} and less than or equal to {Models.Enemy.MAX_POWER}");
         }
 
     }
