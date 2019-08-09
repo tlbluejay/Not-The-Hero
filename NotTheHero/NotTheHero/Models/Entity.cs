@@ -3,6 +3,7 @@ using System;
 
 namespace NotTheHero.Models
 {
+    [Serializable]
     abstract class Entity
     {
         public Entity(int maxHealth, string name, int speed, int accuracy, int defense)

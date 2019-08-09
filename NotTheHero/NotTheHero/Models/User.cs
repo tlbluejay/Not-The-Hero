@@ -36,7 +36,7 @@ namespace NotTheHero.Models
             }
             set
             {
-                GoldException.CheckGold(gold - value);
+                GoldException.CheckGold(gold + value);
                 gold = value;
             }
         }

@@ -44,6 +44,7 @@ namespace NotTheHero.Controller
             string[] options = { "Enter Dungeon" };
             bool diving = true;
             while (diving)
+            {
                 switch (ConsoleIO.PromptForMenuSelection(options, true, "Select an Action: "))
                 {
                     case 0:
@@ -57,12 +58,13 @@ namespace NotTheHero.Controller
                     default:
                         break;
                 }
+            }
         }
 
         private void SaveUser()
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(CurrentUser.Name.Trim() + ".user", 
+            Stream stream = new FileStream("C:\\Users\\Trenton\\Desktop\\C# stuff\\Not-The-Hero\\NotTheHero\\NotTheHero" + CurrentUser.Name.Trim() + ".user", 
                 FileMode.Create ,FileAccess.Write);
             formatter.Serialize(stream, CurrentUser);
             stream.Close();
@@ -71,8 +73,17 @@ namespace NotTheHero.Controller
         private User LoadUser()
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream("Trent.user", FileMode.Open, FileAccess.Read);
-            return (User)formatter.Deserialize(stream);
+            try
+            {
+                Stream stream = new FileStream("Trent.user", FileMode.Open, FileAccess.Read);
+                CurrentUser = (User)formatter.Deserialize(stream);
+            }
+            catch (FileNotFoundException)
+            {
+                CurrentUser = null;
+            }
+            
+            return CurrentUser;
         }
 
         private void FightPhase()
@@ -160,7 +171,7 @@ namespace NotTheHero.Controller
                 {
                     Enemy e = (Enemy)toCheck;
                     Minion m = (Minion)attacker;
-                    CurrentUser.Gold = e.Gold;
+                    CurrentUser.Gold += e.Gold;
                     attacker.Experience = e.Experience;
                     if (m.RankedUp)
                     {

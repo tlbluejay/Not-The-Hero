@@ -33,8 +33,9 @@ namespace NotTheHero.View
                     try
                     {
                         input = Int32.Parse(promptForInput(prompt, false));
+                        isInvalid = false;
                     }
-                    catch (FormatException nfe)
+                    catch (FormatException)
                     {
                         Console.WriteLine("entry has to be a number");
                     }
