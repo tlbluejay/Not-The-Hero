@@ -21,12 +21,9 @@ namespace NotTheHero
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameController gc = new GameController();
         public MainWindow()
         {
             InitializeComponent();
-            gc.InitForTest();
-            gc.EnterDungeonRoom();
         }
     }
 }

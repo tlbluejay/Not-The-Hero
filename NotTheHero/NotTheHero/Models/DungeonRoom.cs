@@ -13,9 +13,10 @@ namespace NotTheHero.Models
 
         public DungeonRoom()
         {
-            for (int i = 0; i < Enemies.Count; i++)
+            for (int i = 0; i < Enemies.Capacity; i++)
             {
-                Enemies.Add(new Enemy(10, "Enemy " + i, 6, 7, 7, 1, 5, 5));
+                Random rand = new Random(System.DateTime.Today.Millisecond);
+                Enemies.Add(new Enemy(10, "Enemy " + i, rand.Next(10), rand.Next(10), rand.Next(10), 1, rand.Next(10), 5));
             }
         }
     }

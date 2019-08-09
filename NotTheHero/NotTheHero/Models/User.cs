@@ -42,6 +42,7 @@ namespace NotTheHero.Models
         }
 
         private readonly List<Minion> party = new List<Minion>(4);
+        public const int PARTY_CAP_SIZE = 4;
         public List<Minion> Party
         {
             get
