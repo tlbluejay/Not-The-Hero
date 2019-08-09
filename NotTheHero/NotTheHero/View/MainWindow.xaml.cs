@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NotTheHero.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace NotTheHero
     /// </summary>
     public partial class MainWindow : Window
     {
+        GameController gc = new GameController();
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            gc.InitForTest();
+            gc.EnterDungeonRoom();
         }
     }
 }

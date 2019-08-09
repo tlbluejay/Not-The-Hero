@@ -67,9 +67,5 @@ namespace NotTheHero.Models
                 return crypt;
             }
         }
-
-        //needs to save the each roster of entities and the stats of each entity
-        //needs to save the crypt's current state
-        //will not be saved during a run through the dungeon
     }
 }

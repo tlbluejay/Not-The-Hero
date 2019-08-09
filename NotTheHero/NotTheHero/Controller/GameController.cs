@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using NotTheHero.Models;
@@ -10,34 +13,66 @@ namespace NotTheHero.Controller
 {
     class GameController
     {
+        public GameController()
+        {
+            CurrentUser = LoadUser();
+        }
+
         public const int MIN_BASE_DMG = 5, MIN_BASE_HEAL = 2, MAX_BASE_DMG = 10, MAX_BASE_HEAL = 10;
         private Random rand = new Random(System.DateTime.Today.Millisecond);
-        private User User = new User("Trent");
+        private User CurrentUser;
         private DungeonRoom room = new DungeonRoom();
 
 
         public void InitForTest()
         {
-            for (int i = 0; i < 4; i++)
+            if (CurrentUser == null)
             {
-                Minion minion = new Minion(10, "Minion " + i, 6, 7, 7);
-                User.Party.Add(minion);
+                CurrentUser = new User("Trent");
+                for (int i = 0; i < CurrentUser.Party.Count; i++)
+                {
+                    Minion minion = new Minion(10, "Minion " + i, 6, 7, 7);
+                    CurrentUser.Party.Add(minion);
+                }
+                CurrentUser.Gold = 10;
             }
-            User.Gold = 10;
 
         }
 
         public void EnterDungeonRoom()
         {
-            string[] options = { "Fight" };
-            switch (ConsoleIO.PromptForMenuSelection(options, false, "Select an Action: "))
-            {
-                case 1:
-                    FightPhase();
-                    break;
-                default:
-                    break;
-            }
+            string[] options = { "Enter Dungeon" };
+            bool diving = true;
+            while (diving)
+                switch (ConsoleIO.PromptForMenuSelection(options, true, "Select an Action: "))
+                {
+                    case 0:
+                        Console.WriteLine("Until next time Adventurer");
+                        diving = false;
+                        break;
+                    case 1:
+                        FightPhase();
+                        SaveUser();
+                        break;
+                    default:
+                        break;
+                }
+        }
+
+        private void SaveUser()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(CurrentUser.Name.Trim() + ".user", 
+                FileMode.Create ,FileAccess.Write);
+            formatter.Serialize(stream, CurrentUser);
+            stream.Close();
+        }
+
+        private User LoadUser()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("Trent.user", FileMode.Open, FileAccess.Read);
+            return (User)formatter.Deserialize(stream);
         }
 
         private void FightPhase()
@@ -48,7 +83,7 @@ namespace NotTheHero.Controller
             bool fighting = true;
             while (fighting)
             {
-                if (User.Party.Count == 0 || room.Enemies.Count == 0)
+                if (CurrentUser.Party.Count == 0 || room.Enemies.Count == 0)
                 {
                     fighting = false;
                 }
@@ -64,7 +99,7 @@ namespace NotTheHero.Controller
                         {
                             enemies.Append(e.Name);
                         }
-                        foreach (Minion m in User.Party)
+                        foreach (Minion m in CurrentUser.Party)
                         {
                             minions.Append(m.Name);
                         }
@@ -77,7 +112,7 @@ namespace NotTheHero.Controller
                                 break;
                             case 2:
                                 HealAction(turnOrder[turn],
-                                    User.Party[ConsoleIO.PromptForMenuSelection(minions, false, "Select a member of the party to heal: ")]);
+                                    CurrentUser.Party[ConsoleIO.PromptForMenuSelection(minions, false, "Select a member of your party to heal: ")]);
                                 break;
                             default:
                                 break;
@@ -85,7 +120,7 @@ namespace NotTheHero.Controller
                     }
                     else
                     {
-                        AttackAction(turnOrder[turn], User.Party[rand.Next(User.Party.Count)]);
+                        AttackAction(turnOrder[turn], CurrentUser.Party[rand.Next(CurrentUser.Party.Count)]);
                     }
                 }
                 turn++;
@@ -94,7 +129,7 @@ namespace NotTheHero.Controller
 
         private void setTurnOrder(List<Entity> turnOrder)
         {
-            foreach (Minion m in User.Party)
+            foreach (Minion m in CurrentUser.Party)
             {
                 turnOrder.Add(m);
             }
@@ -124,21 +159,26 @@ namespace NotTheHero.Controller
                 if (toCheck is Enemy)
                 {
                     Enemy e = (Enemy)toCheck;
-                    User.Gold = e.Gold;
+                    Minion m = (Minion)attacker;
+                    CurrentUser.Gold = e.Gold;
                     attacker.Experience = e.Experience;
+                    if (m.RankedUp)
+                    {
+                        m.RankUp();
+                    }
                     room.Enemies.Remove(e);
                 }
                 else if (toCheck is Minion)
                 {
                     Minion m = (Minion)attacker;
-                    User.Party.Remove(m);
+                    CurrentUser.Party.Remove(m);
                 }
             }
         }
 
         public void AttackAction(Entity usedBy, Entity usedAgainst)
         {
-            int damage = rand.Next(MIN_BASE_DMG, MAX_BASE_DMG) * usedBy.ActionModifier();
+            int damage = (int)Math.Truncate(rand.Next(MIN_BASE_DMG, MAX_BASE_DMG) * usedBy.ActionModifier());
             bool landed = rand.Next(0, 100) > (usedBy.Accuracy / 100);
             if (landed)
             {
@@ -149,7 +189,7 @@ namespace NotTheHero.Controller
 
         public void HealAction(Entity usedBy, Entity usedAgainst)
         {
-            int heal = rand.Next(MIN_BASE_HEAL, MAX_BASE_HEAL) * usedBy.ActionModifier();
+            int heal = (int)Math.Truncate(rand.Next(MIN_BASE_HEAL, MAX_BASE_HEAL) * usedBy.ActionModifier());
             usedAgainst.Health = usedAgainst.Health + heal;
 
         }

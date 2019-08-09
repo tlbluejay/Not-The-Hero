@@ -15,7 +15,7 @@ namespace NotTheHero.Models
         {
             for (int i = 0; i < Enemies.Count; i++)
             {
-                Enemies.Add(new Enemy(10, "Enemy " + i, 6, 7, 7, 1, 5));
+                Enemies.Add(new Enemy(10, "Enemy " + i, 6, 7, 7, 1, 5, 5));
             }
         }
     }
