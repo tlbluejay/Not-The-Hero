@@ -30,11 +30,6 @@ namespace NotTheHero.Controller
             if (CurrentUser == null)
             {
                 CurrentUser = new User("Trent");
-                for (int i = 0; i < User.PARTY_CAP_SIZE; i++)
-                {
-                    Minion minion = new Minion(100, "Minion " + i, rand.Next(10), rand.Next(10), rand.Next(10));
-                    CurrentUser.Party.Add(minion);
-                }
                 CurrentUser.Gold = 10;
             }
         }

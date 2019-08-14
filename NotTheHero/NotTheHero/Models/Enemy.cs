@@ -10,7 +10,7 @@ namespace NotTheHero.Models
             this.power = power;
         }
 
-        public const int MIN_POWER = 10, MAX_POWER = 30, ACTION_MODIFIER_DIVIDER = 35;
+        public const int MIN_POWER = 5, MAX_POWER = 30, ACTION_MODIFIER_DIVIDER = 35;
 
         private int power;
         public int Power
@@ -21,7 +21,6 @@ namespace NotTheHero.Models
             }
             set
             {
-                PowerException.CheckPower(value);
                 power = value;
             }
         }
