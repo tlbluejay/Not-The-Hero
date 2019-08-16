@@ -60,7 +60,7 @@ public class MinionContoller : EntityController
 
     public void ChangeExperience(int diff)
     {
-        experience = Mathf.Clamp(experience + diff, RANK_0, RANK_5);
+        experience = Mathf.Clamp(experience + diff, experience, RANK_5);
     }
 
     public void RankUp()
