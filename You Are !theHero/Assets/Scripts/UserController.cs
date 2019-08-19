@@ -23,34 +23,14 @@ public class UserController : MonoBehaviour
         }
     }
 
-    //private readonly List<T> party = new List<T>(4);
-    //public const int PARTY_CAP_SIZE = 4;
+    public const int PARTY_CAP_SIZE = 4;
 
-    //public List<T> Party
-    //{
-    //    get
-    //    {
-    //        return party;
-    //    }
-    //}
+    public List<GameObject> Party;
 
-    //private readonly List<T> hired = new List<T>();
-    //public List<T> Hired
-    //{
-    //    get
-    //    {
-    //        return hired;
-    //    }
-    //}
+    public List<GameObject> Hired;
 
-    //private readonly Crypt crypt;
-    //public Crypt Crypt
-    //{
-    //    get
-    //    {
-    //        return crypt;
-    //    }
-    //}
+    public GameObject Crypt;
+
     // Start is called before the first frame update
     void Start()
     {

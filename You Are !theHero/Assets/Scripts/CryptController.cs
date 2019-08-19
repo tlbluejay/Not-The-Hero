@@ -5,28 +5,15 @@ using UnityEngine;
 public class CryptController : MonoBehaviour
 {
 
-    //private readonly List<T> upgrades;
-    //public List<T> Upgrades
-    //{
-    //    get
-    //    {
-    //        return upgrades;
-    //    }
-    //}
+    public List<GameObject> Upgrades;
 
-    //private readonly List<T> toHire;
-    //public List<T> ToHire
-    //{
-    //    get
-    //    {
-    //        return toHire;
-    //    }
-    //}
 
-    //public bool Buyable(T buying)
-    //{
-    //    return buying.cost < User.gold;
-    //}
+    public List<GameObject> ToHire;
+
+    public bool Buyable(GameObject buying)
+    {
+        return /*buying.cost < User.gold*/ true;
+    }
 
     // Start is called before the first frame update
     void Start()
