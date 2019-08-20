@@ -29,7 +29,6 @@ public class UserController : MonoBehaviour
 
     public List<GameObject> Hired;
 
-    public GameObject Crypt;
 
     // Start is called before the first frame update
     void Start()

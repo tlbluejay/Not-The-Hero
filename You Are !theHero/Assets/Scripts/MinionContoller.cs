@@ -11,6 +11,8 @@ public class MinionContoller : EntityController
     MIN_SPEED_UPGRADE = 0, MAX_SPEED_UPGRADE = 3,
     MIN_DEFENSE_UPGRADE = 0, MAX_DEFENSE_UPGRADE = 4;
 
+    public int hireCost;
+
     private bool rankedUp = false;
     public bool RankedUp
     {
