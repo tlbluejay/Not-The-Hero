@@ -18,7 +18,7 @@ public class EnemyController : EntityController
     // Start is called before the first frame update
     void Start()
     {
-        
+        ChangeHealth(maxHealth);
     }
 
     // Update is called once per frame

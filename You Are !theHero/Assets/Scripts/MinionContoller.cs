@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MinionContoller : EntityController
 {
@@ -107,16 +105,26 @@ public class MinionContoller : EntityController
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        ChangeHealth(maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 position = rigidbody2D.position;
-        float horizontal = Input.GetAxis("Horizontal");
-        //float vertical = Input.GetAxis("Vertical");
-        position.x = position.x + moveSpeed * horizontal * Time.deltaTime;
-        //position.y = position.y + moveSpeed * vertical * Time.deltaTime;
-        rigidbody2D.MovePosition(position);
+        bool inCombat = false;
+        CombatController combatController = GetComponentInParent<CombatController>();
+        if (combatController != null)
+        {
+            inCombat = combatController.inCombat;
+        }
+        if (!inCombat)
+        {
+            Vector2 position = rigidbody2D.position;
+            float horizontal = Input.GetAxis("Horizontal");
+            //float vertical = Input.GetAxis("Vertical");
+            position.x = position.x + moveSpeed * horizontal * Time.deltaTime;
+            //position.y = position.y + moveSpeed * vertical * Time.deltaTime;
+            rigidbody2D.MovePosition(position);
+        }
     }
 }
