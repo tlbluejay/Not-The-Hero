@@ -11,6 +11,9 @@ public class MinionContoller : EntityController
     MIN_SPEED_UPGRADE = 0, MAX_SPEED_UPGRADE = 3,
     MIN_DEFENSE_UPGRADE = 0, MAX_DEFENSE_UPGRADE = 4;
 
+    private new Rigidbody2D rigidbody2D;
+    public float moveSpeed = 4.0f;
+
     public int hireCost;
 
     private bool rankedUp = false;
@@ -103,12 +106,17 @@ public class MinionContoller : EntityController
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Vector2 position = rigidbody2D.position;
+        float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = Input.GetAxis("Vertical");
+        position.x = position.x + moveSpeed * horizontal * Time.deltaTime;
+        //position.y = position.y + moveSpeed * vertical * Time.deltaTime;
+        rigidbody2D.MovePosition(position);
     }
 }
