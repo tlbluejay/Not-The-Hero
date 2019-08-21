@@ -51,6 +51,5 @@ public class EntityController : MonoBehaviour
     public void ChangeHealth(int diff)
     {
         currentHealth = Mathf.Clamp(currentHealth + diff, 0, maxHealth);
-        if (currentHealth == 0) Destroy(gameObject);
     }
 }
