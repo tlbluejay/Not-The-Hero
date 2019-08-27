@@ -10,6 +10,8 @@ public class MinionStateMachine : MonoBehaviour
 
     public enum TurnState
     {
+        Processing,
+        AddToList,
         Waiting,
         Selecting,
         Action,
@@ -18,15 +20,26 @@ public class MinionStateMachine : MonoBehaviour
 
     public TurnState currentState;
 
-    void updateProgress()
-    {
+    private float currentCooldown = 0f;
+    private float maxCooldown = 5f;
+    public Image ProgressBar;
 
+    void updateProgressBar()
+    {
+        currentCooldown = currentCooldown + Time.deltaTime;
+        float calculateCooldown = currentCooldown / maxCooldown;
+        ProgressBar.transform.localScale = 
+            new Vector3(Mathf.Clamp(calculateCooldown, 0, 1), ProgressBar.transform.localScale.y, ProgressBar.transform.localScale.z);
+        if (currentCooldown >= maxCooldown)
+        {
+            currentState = TurnState.AddToList;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentState = TurnState.Processing;
     }
 
     // Update is called once per frame
@@ -34,6 +47,11 @@ public class MinionStateMachine : MonoBehaviour
     {
         switch(currentState)
         {
+            case TurnState.Processing:
+                updateProgressBar();
+                break;
+            case TurnState.AddToList:
+                break;
             case TurnState.Waiting:
                 break;
             case TurnState.Selecting:
@@ -41,6 +59,8 @@ public class MinionStateMachine : MonoBehaviour
             case TurnState.Action:
                 break;
             case TurnState.Dead:
+                break;
+            default:
                 break;
         }
     }
