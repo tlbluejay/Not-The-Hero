@@ -36,8 +36,23 @@ public class BattleStateMachine : MonoBehaviour
         switch(battleStates)
         {
             case PerformAction.Wait:
+                if (PerformList.Count > 0)
+                {
+                    battleStates = PerformAction.TakeAction;
+                }
                 break;
             case PerformAction.TakeAction:
+                GameObject performer = GameObject.Find(PerformList[0].AttackersName);
+                if(PerformList[0].Type == "Enemy")
+                {
+                    EnemyStateMachine esm = performer.GetComponent<EnemyStateMachine>();
+                    esm.target = PerformList[0].Target;
+                    esm.currentState = EnemyStateMachine.TurnState.Action;
+                }
+                else if (PerformList[0].Type == "Minion")
+                {
+
+                }
                 break;
             case PerformAction.PerformAction:
                 break;
